@@ -1,0 +1,27 @@
+{
+  "name": "meteor-af",
+  "version": "0.1.0",
+  "description": "Deploy your meteor application to AppFog.com",
+  "author": "Simon Degraeve <simon.degraeve@gmail.com>",
+  "bin": {"meteor-af": "./bin/meteor-af"},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SimonDegraeve/meteor-af.git"
+  },
+  "keywords": [
+    "meteor",
+    "appfog",
+    "deploy"
+  ],
+  "engines": {
+    "node": ">= 0.6.x"
+  },
+  "dependencies": {
+    "commander": ">=1.1.1"
+  },
+  "license": "BSD",
+  "readmeFilename": "README.md"
+}
