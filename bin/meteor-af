@@ -14,9 +14,9 @@ clc = require("cli-color")
 ###
 Shell colors
 ###
-err = clc.red.bold
+err = clc.red
 title = clc.blueBright.bold
-info = clc.yellowBright
+info = clc.green
 
 
 ###
@@ -179,8 +179,8 @@ program
 program.on "--help", ->
   console.log "  Examples:"
   console.log ""
-  console.log "    $ " + title("meteor-af") + " deploy " + info("MyApp") + "      # MyApp is your AppFog application"
-  console.log "    $ " + title("meteor-af") + " " + info("-m") + " deploy " + info("MyApp") + "   # to use with meteorite"
+  console.log "    $ meteor-af deploy MyApp      # MyApp is your AppFog application"
+  console.log "    $ meteor-af -m deploy MyApp   # to use with meteorite"
   console.log ""
 
 
@@ -213,9 +213,6 @@ program.command("deploy [name]").description("deploy the current meteor project 
   # AppFog part
   process.stdout.write title("\n--------\n AppFog \n--------\n")
   afLogin()
-
-  # Exit
-  #exit(0);
 
 program.parse process.argv
 
