@@ -190,7 +190,7 @@ program.command("deploy [name]").description("deploy the current meteor project 
   # Test if tere is an app name
   app_name = name
   unless app_name
-    process.stderr.write " - " + err("ERROR: You must provide the name of the application you want to deploy\n")
+    process.stderr.write err("ERROR: You must provide the name of the application you want to deploy\n")
     process.exit 1
   
   # Required Part
