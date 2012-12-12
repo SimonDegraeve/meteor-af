@@ -172,9 +172,8 @@ catch e
   process.exit 1
 
 # Display usage
-program.usage("[options] [command]").option
-  "-mrt, --meteorite", "use meteorite instead of meteor",
-  "-v, --verbose", "verbose command output"
+program
+  .usage("[options] [command]").option("-mrt, --meteorite", "use meteorite instead of meteor").option("-v, --verbose", "verbose command output")
 program.on "--help", ->
   console.log "  Examples:"
   console.log ""
