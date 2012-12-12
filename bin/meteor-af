@@ -179,7 +179,8 @@ program
 program.on "--help", ->
   console.log "  Examples:"
   console.log ""
-  console.log "    $ " + title("meteor-af") + " deploy " + info("MyApp") + "    # " + info("MyApp") + " is your AppFog application"
+  console.log "    $ " + title("meteor-af") + " deploy " + info("MyApp") + "      # MyApp is your AppFog application"
+  console.log "    $ " + title("meteor-af") + " " + info("-m") + " deploy " + info("MyApp") + "   # to use with meteorite"
   console.log ""
 
 
