@@ -1,6 +1,6 @@
 # meteor-af
 
-Deploy your meteor application to [AppFog](http://www.appfog.com).
+Deploy your [meteor](http://meteor.com/) application to [AppFog](http://www.appfog.com).
 
 ## Installation
 
@@ -12,7 +12,7 @@ npm install meteor-af
 
 Launch **meteor-af** in your meteor project directory.
 ```
-  meteor-af deploy MyApp    # MyApp is your AppFog application
+  meteor-af deploy MyApp        # MyApp is your AppFog application
 ```
 
 ## AF command line tool
