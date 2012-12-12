@@ -154,7 +154,6 @@ afUpdate = (app_name) ->
       process.stderr.write err("ERROR: Couldn't update " + app_name + " \n")
       exit 1
     else
-      process.stdout.write "Update " + info(app_name) + "\n"
       exit 0
 
 exit = (code) ->
