@@ -24,6 +24,7 @@ Variables
 ###
 which_path = "/usr/bin/which"
 meteor_path = undefined
+meteorite_path = undefined
 tar_path = undefined
 mkdir_path = undefined
 rm_path = undefined
@@ -66,10 +67,15 @@ findRequired = ->
   mkdir_path = findExecPath("mkdir")
   rm_path = findExecPath("rm")
   af_path = findExecPath("af")
+  meteorite_path = findExecPath("mrt") if program.meteorite
+
 
 meteorBundleCreate = ->
   process.stdout.write "Create the bundle " + info(bundle_tar) + " in " + app_dir + "\n"
-  meteor_cmd = execSync(meteor_path + " bundle " + bundle_tar, true)
+  if program.meteorite
+    meteor_cmd = execSync(meteorite_path + " bundle " + bundle_tar, true)
+  else
+    meteor_cmd = execSync(meteor_path + " bundle " + bundle_tar, true)
   if meteor_cmd.stdout # HACK: no error if sdtout is empty
     process.stderr.write err("ERROR: Couldn't create the bundle \n") + meteor_cmd.stdout + "\n"
     exit 1
@@ -166,7 +172,9 @@ catch e
   process.exit 1
 
 # Display usage
-program.usage("[options] [command]").option "-v, --verbose", "verbose command output"
+program.usage("[options] [command]").option
+  "-mrt, --meteorite", "use meteorite instead of meteor",
+  "-v, --verbose", "verbose command output"
 program.on "--help", ->
   console.log "  Examples:"
   console.log ""

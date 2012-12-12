@@ -14,6 +14,8 @@
   "keywords": [
     "meteor",
     "appfog",
+    "meteorite",
+    "atmosphere",
     "deploy"
   ],
   "engines": {
