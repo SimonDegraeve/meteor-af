@@ -11,6 +11,7 @@ npm install meteor-af
 ## AF command line tool
 
 **meteor-af** use the [command line tool](https://github.com/appfog/af) provide by AppFog. It uses the "update" command to deploy the application, let me know if you are interrested by using the "push" command (or anything else).
+
 You also need to go to **Add-ons** and install either MongoLab or MongoHQ. After you have done so, go to **Env Variables** and add **MONGO_URL** variable specified by MongoLab or MongoHQ.
 
 ```
