@@ -74,11 +74,14 @@ meteorBundleCreate = ->
   process.stdout.write "Create the bundle " + info(bundle_tar) + " in " + app_dir + "\n"
   if program.meteorite
     meteor_cmd = execSync(meteorite_path + " bundle " + bundle_tar, true)
-  else
+    if meteor_cmd.stdout.length > 168 # HACK: 168 = normal output, no error
+      process.stderr.write err("ERROR: Couldn't create the bundle \n") + meteor_cmd.stdout + "\n"
+      exit 1
+  else  
     meteor_cmd = execSync(meteor_path + " bundle " + bundle_tar, true)
-  if meteor_cmd.stdout # HACK: no error if sdtout is empty
-    process.stderr.write err("ERROR: Couldn't create the bundle \n") + meteor_cmd.stdout + "\n"
-    exit 1
+    if meteor_cmd.stdout # HACK: no error if sdtout is empty
+      process.stderr.write err("ERROR: Couldn't create the bundle \n") + meteor_cmd.stdout + "\n"
+      exit 1    
     
 meteorBundleExtract = ->
   process.stdout.write "Extract the bundle " + info(bundle_tar) + " to " + tmp_folder + "\n"
