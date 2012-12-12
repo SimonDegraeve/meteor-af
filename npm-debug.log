@@ -1,0 +1,106 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'nodejs', '/usr/bin/npm', 'publish', '.' ]
+2 info using npm@1.1.66
+3 info using node@v0.8.15
+4 verbose publish [ '.' ]
+5 verbose read json /home/simon/DEV/meteor-af/package.json
+6 verbose cache add [ '.', null ]
+7 silly cache add name=undefined spec="." args=[".",null]
+8 verbose parsed url { pathname: '.', path: '.', href: '.' }
+9 silly lockFile 3a52ce78- .
+10 verbose lock . /home/simon/.npm/3a52ce78-.lock
+11 verbose read json package.json
+12 verbose tar pack [ '/home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/tmp.tgz',
+12 verbose tar pack   '.' ]
+13 verbose tarball /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/tmp.tgz
+14 verbose folder .
+15 info prepublish meteor-af@0.2.1
+16 silly lockFile 867dce04-75947-0-8115585194900632-tmp-tgz /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/tmp.tgz
+17 verbose lock /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/tmp.tgz /home/simon/.npm/867dce04-75947-0-8115585194900632-tmp-tgz.lock
+18 silly lockFile 867dce04-75947-0-8115585194900632-tmp-tgz /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/tmp.tgz
+19 verbose tar unpack /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/tmp.tgz
+20 silly lockFile 7827d5d6-75947-0-8115585194900632-package /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/package
+21 verbose lock /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/package /home/simon/.npm/7827d5d6-75947-0-8115585194900632-package.lock
+22 silly gunzTarPerm modes [ '755', '644' ]
+23 silly gunzTarPerm extractEntry package.json
+24 silly gunzTarPerm modified mode [ 'package.json', 436, 420 ]
+25 silly gunzTarPerm extractEntry .npmignore
+26 silly gunzTarPerm modified mode [ '.npmignore', 436, 420 ]
+27 silly gunzTarPerm extractEntry README.md
+28 silly gunzTarPerm modified mode [ 'README.md', 436, 420 ]
+29 silly gunzTarPerm extractEntry bin/meteor-af
+30 silly gunzTarPerm modified mode [ 'bin/meteor-af', 509, 493 ]
+31 verbose read json /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/package/package.json
+32 silly lockFile 7827d5d6-75947-0-8115585194900632-package /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/package
+33 verbose from cache /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/package/package.json
+34 verbose tar pack [ '/home/simon/.npm/meteor-af/0.2.1/package.tgz',
+34 verbose tar pack   '/home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/package' ]
+35 verbose tarball /home/simon/.npm/meteor-af/0.2.1/package.tgz
+36 verbose folder /home/simon/tmp/npm-28190/1355303675947-0.8115585194900632/package
+37 silly lockFile 1c173ee0--npm-meteor-af-0-2-1-package-tgz /home/simon/.npm/meteor-af/0.2.1/package.tgz
+38 verbose lock /home/simon/.npm/meteor-af/0.2.1/package.tgz /home/simon/.npm/1c173ee0--npm-meteor-af-0-2-1-package-tgz.lock
+39 silly lockFile 1c173ee0--npm-meteor-af-0-2-1-package-tgz /home/simon/.npm/meteor-af/0.2.1/package.tgz
+40 silly lockFile 32e506dc-imon-npm-meteor-af-0-2-1-package /home/simon/.npm/meteor-af/0.2.1/package
+41 verbose lock /home/simon/.npm/meteor-af/0.2.1/package /home/simon/.npm/32e506dc-imon-npm-meteor-af-0-2-1-package.lock
+42 silly lockFile 32e506dc-imon-npm-meteor-af-0-2-1-package /home/simon/.npm/meteor-af/0.2.1/package
+43 verbose tar unpack /home/simon/.npm/meteor-af/0.2.1/package.tgz
+44 silly lockFile 32e506dc-imon-npm-meteor-af-0-2-1-package /home/simon/.npm/meteor-af/0.2.1/package
+45 verbose lock /home/simon/.npm/meteor-af/0.2.1/package /home/simon/.npm/32e506dc-imon-npm-meteor-af-0-2-1-package.lock
+46 silly gunzTarPerm modes [ '755', '644' ]
+47 silly gunzTarPerm extractEntry package.json
+48 silly gunzTarPerm extractEntry .npmignore
+49 silly gunzTarPerm extractEntry README.md
+50 silly gunzTarPerm extractEntry bin/meteor-af
+51 verbose read json /home/simon/.npm/meteor-af/0.2.1/package/package.json
+52 silly lockFile 32e506dc-imon-npm-meteor-af-0-2-1-package /home/simon/.npm/meteor-af/0.2.1/package
+53 silly shasum updated bytes 3106
+54 info shasum 9407cca8874877a9d468ad18008c794328d2dc20
+54 info shasum /home/simon/.npm/meteor-af/0.2.1/package.tgz
+55 verbose from cache /home/simon/.npm/meteor-af/0.2.1/package/package.json
+56 verbose chmod /home/simon/.npm/meteor-af/0.2.1/package.tgz 644
+57 verbose chown /home/simon/.npm/meteor-af/0.2.1/package.tgz [ 1000, 1000 ]
+58 silly lockFile 3a52ce78- .
+59 silly publish { name: 'meteor-af',
+59 silly publish   version: '0.2.1',
+59 silly publish   description: 'Deploy your meteor application to AppFog.com',
+59 silly publish   author: { name: 'Simon Degraeve', email: 'simon.degraeve@gmail.com' },
+59 silly publish   bin: { 'meteor-af': './bin/meteor-af' },
+59 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+59 silly publish   repository:
+59 silly publish    { type: 'git',
+59 silly publish      url: 'https://github.com/SimonDegraeve/meteor-af.git' },
+59 silly publish   keywords: [ 'meteor', 'appfog', 'meteorite', 'atmosphere', 'deploy' ],
+59 silly publish   engines: { node: '>= 0.8.x' },
+59 silly publish   dependencies:
+59 silly publish    { 'coffee-script': '>=1.4.0',
+59 silly publish      commander: '>=1.1.1',
+59 silly publish      'cli-color': '>=0.2.1',
+59 silly publish      'exec-sync': '>=0.1.5' },
+59 silly publish   license: 'BSD',
+59 silly publish   readmeFilename: 'README.md',
+59 silly publish   readme: '# meteor-af\n\nDeploy your [meteor](http://meteor.com/) application to [AppFog](http://www.appfog.com).\n\n## Installation\n\n```\nnpm install meteor-af \n```\n\nYou also need to go to **Add-ons** and install either MongoLab or MongoHQ. After you have done so, go to **Env Variables** and add **MONGO_URL** variable specified by MongoLab or MongoHQ.\n\n```\nExample:\n\nName               Value\nMONGO_URL          mongodb://appfog:<password>@linus.mongohq.com:10094/<database>\n```\n\n## AF command line tool\n\n**meteor-af** use the [command line tool](https://github.com/appfog/af) provide by AppFog. It uses the "update" command to deploy the application, let me know if you are interrested by using the "push" command (or anything else).\n\n## Usage\n\nLaunch **meteor-af** in your meteor project directory.\n```\n  meteor-af deploy MyApp             # where \'MyApp\' is your AppFog application\n  meteor-af -mrt deploy MyAPP        # if you want to use meteorite instead of meteor   \n```\n\n## Compatibilities\n\nTesting with Meteor 0.5.0 and Ubuntu 12.10.\n\n',
+59 silly publish   _id: 'meteor-af@0.2.1',
+59 silly publish   dist: { shasum: '9407cca8874877a9d468ad18008c794328d2dc20' } }
+60 verbose url raw meteor-af
+61 verbose url resolving [ 'https://registry.npmjs.org/', './meteor-af' ]
+62 verbose url resolved https://registry.npmjs.org/meteor-af
+63 info trying registry request attempt 1 at 17:14:36
+64 http PUT https://registry.npmjs.org/meteor-af
+65 http 409 https://registry.npmjs.org/meteor-af
+66 verbose url raw meteor-af
+67 verbose url resolving [ 'https://registry.npmjs.org/', './meteor-af' ]
+68 verbose url resolved https://registry.npmjs.org/meteor-af
+69 info trying registry request attempt 1 at 17:14:39
+70 http GET https://registry.npmjs.org/meteor-af
+71 http 200 https://registry.npmjs.org/meteor-af
+72 error publish fail Cannot publish over existing version.
+72 error publish fail Bump the 'version' field, set the --force flag, or
+72 error publish fail     npm unpublish 'meteor-af@0.2.1'
+72 error publish fail and try again
+73 error System Linux 3.5.0-19-generic
+74 error command "nodejs" "/usr/bin/npm" "publish" "."
+75 error cwd /home/simon/DEV/meteor-af
+76 error node -v v0.8.15
+77 error npm -v 1.1.66
+78 error code EPUBLISHCONFLICT
+79 verbose exit [ 1, true ]
