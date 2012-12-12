@@ -1,0 +1,213 @@
+#!/usr/bin/env coffee
+
+###
+Module dependencies
+###
+fs = require("fs")
+cp = require("child_process")
+cs = require("coffee-script")
+program = require("commander")
+execSync = require("exec-sync")
+clc = require("cli-color")
+
+
+###
+Shell colors
+###
+err = clc.red.bold
+title = clc.blueBright.bold
+info = clc.yellowBright
+
+
+###
+Variables
+###
+which_path = "/usr/bin/which"
+meteor_path = undefined
+tar_path = undefined
+mkdir_path = undefined
+rm_path = undefined
+af_path = undefined
+app_name = undefined
+app_dir = process.cwd()
+tmp_folder = app_dir + "/.tmp"
+tmp_bundle_file = tmp_folder + "/bundle"
+bundle_tar = "app.tgz"
+bundle_af_tar = "app-af.tgz"
+# Hack
+file_to_edit = tmp_bundle_file + "/server/server.js"
+search_str = "var port = process.env.PORT ? "
+replace_str = ["//var port = process.env.PORT ? parseInt(process.env.PORT) : 80;", "  ", "  // Hack to deploy to AppFog.com", "  var port = process.env.VMC_APP_PORT ? parseInt(process.env.VMC_APP_PORT) : 1337;", "  var env = JSON.parse(process.env.VCAP_SERVICES);", "  var mongo = env['mongodb-1.8'][0]['credentials'];", "  var mongo_url = 'mongodb://' + mongo.username + ':' + mongo.password + '@' + mongo.hostname + ':' + mongo.port + '/' + mongo.db;"].join("\n")
+
+
+###
+Functions
+###
+findExecPath = (exec) ->
+  which_cmd = execSync(which_path + " " + exec, true)
+  unless which_cmd.stdout
+    if exec is "af"
+      process.stderr.write err("ERROR: Couldn't locate " + exec + "\n") + "You can visit " + info("https://docs.appfog.com/getting-started/af-cli") + " to install it.\n"
+      process.exit 1
+    else
+      process.stderr.write err("ERROR: Couldn't locate " + exec + "\n")
+      process.exit 1
+  else
+    process.stdout.write "Locate " + info(exec) + " in " + which_cmd.stdout + "\n"  if program.verbose
+    which_cmd.stdout
+
+findRequired = ->
+  exists = fs.existsSync(which_path)
+  unless exists
+    process.stderr.write err("ERROR: Couldn't locate " + info(which_path) + "\n")
+    process.exit 1
+  meteor_path = findExecPath("meteor")
+  tar_path = findExecPath("tar")
+  mkdir_path = findExecPath("mkdir")
+  rm_path = findExecPath("rm")
+  af_path = findExecPath("af")
+
+meteorBundleCreate = ->
+  process.stdout.write "Create the bundle " + info(bundle_tar) + " in " + app_dir + "\n"
+  meteor_cmd = execSync(meteor_path + " bundle " + bundle_tar, true)
+  if meteor_cmd.stdout # HACK: no error if sdtout is empty
+    process.stderr.write err("ERROR: Couldn't create the bundle \n") + meteor_cmd.stdout + "\n"
+    exit 1
+    
+meteorBundleExtract = ->
+  process.stdout.write "Extract the bundle " + info(bundle_tar) + " to " + tmp_folder + "\n"
+  tar_cmd = execSync(tar_path + " -xf " + bundle_tar + " -C " + tmp_folder, true)
+  if tar_cmd.stderr
+    process.stderr.write err("ERROR: Couldn't extract the bundle to " + tmp_folder + "\n") + tar_cmd.stderr + "\n"
+    exit 1
+    
+meteorBundleReplace = ->
+  process.stdout.write "Replace the content with the " + info("hack") + " in " + file_to_edit + "\n"
+  try
+    data = fs.readFileSync(file_to_edit, "utf8")
+  catch e
+    process.stderr.write err("ERROR: Couldn't read the file " + file_to_edit + "\n") + e + "\n"
+    exit 1
+  try
+    data = data.toString().replace(search_str, replace_str)
+  catch e
+    process.stderr.write err("ERROR: Couldn't replace the content with the hack in " + file_to_edit + "\n") + e + "\n"
+    exit 1
+  try
+    fs.writeFileSync file_to_edit, data, "utf8"
+  catch e
+    process.stderr.write err("ERROR: Couldn't write the file " + file_to_edit + "\n") + e + "\n"
+    exit 1
+
+meteorBundleTar = ->
+  process.stdout.write "Create the archive " + info(bundle_af_tar) + " from " + tmp_folder + "/bundle/*" + "\n"
+  tar_cmd = execSync(tar_path + " -czf " + bundle_af_tar + " " + " -C " + tmp_folder + " bundle", true)
+  if tar_cmd.stderr
+    process.stderr.write err("ERROR: Couldn't create the archive " + bundle_af_tar + "from " + tmp_folder + "/bundle/*" + "\n") + tar_cmd.stderr + "\n"
+    exit 1
+
+createTmpFolder = ->
+  exists = fs.existsSync(tmp_folder)
+  removeTmpFolder()  if exists
+  process.stdout.write "Create the temporary folder in " + tmp_folder + "\n"  if program.verbose
+  mkdir_cmd = execSync(mkdir_path + " " + tmp_folder, true)
+  if mkdir_cmd.stderr
+    process.stderr.write err("ERROR: Couldn't create " + tmp_folder + "\n") + mkdir_cmd.stderr + "\n"
+    exit 1
+    
+
+removeTmpFolder = ->
+  exists = fs.existsSync(tmp_folder)
+  if exists
+    process.stdout.write "Delete the temporary folder in " + tmp_folder + "\n"  if program.verbose
+    rm_cmd = execSync(rm_path + " -rf " + tmp_folder, true)
+    if rm_cmd.stderr
+      process.stderr.write err("ERROR: Couldn't delete " + tmp_folder + "\n") + rm_cmd.stderr + "\n"
+      exit 1
+
+afLogin = ->
+  af_cmd = cp.spawn("af", ["login"],
+    stdio: "inherit"
+  )
+  af_cmd.on "exit", (code) ->
+    unless code is 0
+      process.stderr.write err("ERROR: Couldn't login to AppFog \n")
+      exit 1
+    else
+      afUpdate app_name
+
+afUpdate = (app_name) ->
+  af_cmd = cp.spawn("af", ["update", app_name, "--path", tmp_bundle_file],
+    stdio: "inherit"
+  )
+  af_cmd.on "exit", (code) ->
+    unless code is 0
+      process.stderr.write err("ERROR: Couldn't update " + app_name + " \n")
+      exit 1
+    else
+      process.stdout.write "Update " + info(app_name) + "\n"
+      exit 0
+
+exit = (code) ->
+  removeTmpFolder()
+  process.stdin.destroy()
+  process.stdout.write "\n"
+  process.exit code
+
+
+###
+Start program
+###
+try
+  pkg = JSON.parse(fs.readFileSync(__dirname + "/../package.json"))
+  program.version pkg.version
+catch e
+  process.stderr.write " - " + err("ERROR: Couldn't find the version of the package in " + __dirname + "/../package.json \n") + e + "\n"
+  process.exit 1
+
+# Display usage
+program.usage("[options] [command]").option "-v, --verbose", "verbose command output"
+program.on "--help", ->
+  console.log "  Examples:"
+  console.log ""
+  console.log "    $ " + title("meteor-af") + " deploy " + info("MyApp") + "    # " + info("MyApp") + " is your AppFog application"
+  console.log ""
+
+
+# Deploy command
+program.command("deploy [name]").description("deploy the current meteor project to an AppFog application").action (name) ->
+  
+  # Test if tere is an app name
+  app_name = name
+  unless app_name
+    process.stderr.write " - " + err("ERROR: You must provide the name of the application you want to deploy\n")
+    process.exit 1
+  
+  # Required Part
+  process.stdout.write title("\n----------\n Required \n----------\n")  if program.verbose
+  findRequired()
+  
+  # Meteor Part
+  process.stdout.write title("\n--------\n Meteor \n--------\n")
+  # Create the temporary folder
+  createTmpFolder()
+  # Create the meteor app bundle
+  meteorBundleCreate()
+  # Extract the bundle
+  meteorBundleExtract() 
+  # Replace some content for AppFog configuration and create the new archive
+  meteorBundleReplace()
+  # Create new Bundle with the hack
+  meteorBundleTar()
+  
+  # AppFog part
+  process.stdout.write title("\n--------\n AppFog \n--------\n")
+  afLogin()
+
+  # Exit
+  #exit(0);
+
+program.parse process.argv
+
+# Display the help if no command
+program.help()  unless program.args.length
