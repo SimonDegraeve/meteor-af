@@ -37,7 +37,7 @@ bundle_tar = "app.tgz"
 bundle_af_tar = "app-af.tgz"
 # Hack
 file_to_edit = tmp_bundle_file + "/server/server.js"
-search_str = "var port = process.env.PORT ? "
+search_str = "var port = process.env.PORT ? parseInt(process.env.PORT) : 80;"
 replace_str = ["//var port = process.env.PORT ? parseInt(process.env.PORT) : 80;", "  ", "  // Hack to deploy to AppFog.com", "  var port = process.env.VMC_APP_PORT ? parseInt(process.env.VMC_APP_PORT) : 1337;", "  var env = JSON.parse(process.env.VCAP_SERVICES);", "  var mongo = env['mongodb-1.8'][0]['credentials'];", "  var mongo_url = 'mongodb://' + mongo.username + ':' + mongo.password + '@' + mongo.hostname + ':' + mongo.port + '/' + mongo.db;"].join("\n")
 
 
