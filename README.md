@@ -38,8 +38,12 @@ Usage: meteor-af command [<args>] [options]
  
 ## Todo
 
-Use "af push" to create a new app if it not exists.
-Create and bind automatically the mongodb service from appfog it it not exists.
+- Use "af push" to create a new app if it not exists.
+
+- Create and bind automatically the mongodb service from appfog it it not exists.
+
+
+
 
 ## Compatibilities
 
