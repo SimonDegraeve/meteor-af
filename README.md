@@ -49,5 +49,5 @@ Currently available commands are:
 
 ## Compatibilities
 
-Testing with Meteor 0.5.0, appfog cammand line 0.3.18 and Ubuntu 12.10.
+Testing with Meteor 0.5.0, appfog command line 0.3.18 and Ubuntu 12.10.
 
