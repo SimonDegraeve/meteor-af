@@ -1,6 +1,6 @@
 {
   "name": "meteor-af",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Deploy your meteor application to AppFog.com",
   "author": "Simon Degraeve <simon.degraeve@gmail.com>",
   "bin": {"meteor-af": "./bin/meteor-af"},
