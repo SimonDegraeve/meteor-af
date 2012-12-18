@@ -29,6 +29,8 @@ Or if you want to install globally
 Launch **meteor-af** in your meteor project directory.
 ```
 Usage: meteor-af command [<args>] [options] 
+
+Currently available commands are:
  update <appname>                                              Bundle and update the application bits
  update <appname> -b, --bundler <meteor, meteorite>            Set the bundler to use, default is auto-detect
  update <appname> -m, --mongodb <appfog, mongohq, mongolab>    Set the mongodb service to use, default is appfog service 
