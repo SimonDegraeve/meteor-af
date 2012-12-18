@@ -55,7 +55,7 @@ exports.run = (options) ->
     process.exit 1
 
   # Call bundle command
-  options.deploy = true
+  options.update = true
   require("./bundle").run(options)
 
   # If bundle to update exists

@@ -16,7 +16,10 @@ hack_appfog = ["//var port = process.env.PORT ? parseInt(process.env.PORT) : 80;
                "  // Hack for AppFog"
                "  var port = process.env.VMC_APP_PORT ? parseInt(process.env.VMC_APP_PORT) : 1337;"
                "  var env = JSON.parse(process.env.VCAP_SERVICES);"
+               "  if(!env['mongodb-1.8'])"
+               "   throw new Error('Make sure AppFog MongoDB service is bind to your application.');"
                "  var mongo = env['mongodb-1.8'][0]['credentials'];"
+               ""
                "  process.env.MONGO_URL = mongo.url;"].join("\n")
 hack_mongohq = ["//var port = process.env.PORT ? parseInt(process.env.PORT) : 80;"
                "  "
@@ -162,8 +165,8 @@ exports.run = (options) ->
     process.exit 1
   console.log "OK".info
 
-  # If not invoked by deploy
-  if not options.deploy
+  # If not invoked by update
+  if not options.update
     # Remove tmp directory if exists
     if test('-d', tmp_path)
       rm "-rf", tmp_path
