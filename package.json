@@ -1,6 +1,6 @@
 {
   "name": "meteor-af",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "Deploy your meteor application to AppFog.com",
   "author": "Simon Degraeve <simon.degraeve@gmail.com>",
   "bin": {"meteor-af": "./bin/meteor-af"},
@@ -15,17 +15,16 @@
     "meteor",
     "appfog",
     "meteorite",
-    "atmosphere",
-    "deploy"
+    "deployment"
   ],
   "engines": {
     "node": "0.8.x"
   },
   "dependencies": {
     "coffee-script": "1.4.0",
-    "commander": "1.1.1",
-    "cli-color": "0.2.1",
-    "exec-sync": "0.1.5"
+    "dreamopt": "0.8.0",
+    "colors": "0.6.0-1",
+    "shelljs": "0.0.9"
   },
   "license": "BSD",
   "readmeFilename": "README.md"
