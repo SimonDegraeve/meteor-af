@@ -1,5 +1,7 @@
 # meteor-af
 
+# /!\ THIS PROJECT IS DEPRECATED
+
 Deploy your [meteor](http://meteor.com/) application to [AppFog](http://www.appfog.com).
 
 The tool is also compatible with [meteorite](https://atmosphere.meteor.com/wtf/app) and it can be used to deploy your application using different mongoDB service: **appfog mogoDB**, **mongoHQ** and **mongoLab**.
